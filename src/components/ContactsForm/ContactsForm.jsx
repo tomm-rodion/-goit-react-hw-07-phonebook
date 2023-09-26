@@ -11,21 +11,46 @@ import {
   ButtonAddContact,
 } from './ContactsForm.styled';
 import { addContacts } from 'redux/contacts/operations';
+import Notiflix from 'notiflix';
+import { number } from 'yup';
 
 export const ContactsForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
   const onformSubmit = value => {
-    const nameInContacts = contacts.find(
-      ({ name }) => name.toLowerCase() === value.name.toLowerCase()
-    );
-    //перевірка існуючого кантакта в телефоній книжці.
-    if (nameInContacts) {
-      alert(`${value.name} is already in contacts.`);
+    const nameInContacts = () =>
+      contacts.find(
+        ({ name }) => name.toLowerCase() === value.name.toLowerCase()
+      );
+    const renameContact = newName =>
+      contacts.find(({ name }) => name.toLowerCase() === newName.toLowerCase());
+    if (nameInContacts()) {
+      Notiflix.Notify.warning(`${value.name} is already in contacts.`, {
+        timeout: 5000,
+      });
+      Notiflix.Confirm.prompt(
+        'Rename a contact',
+        'Rename the contact you want to create!',
+        '',
+        'Answer',
+        'Cancel',
+        function okCb(newName) {
+          let result = renameContact(newName);
+          if (!result) {
+            dispatch(addContacts((value = { name: newName, number })));
+          } else {
+            Notiflix.Notify.warning(
+              `What you do? Name : ${newName} already exists !!!. `,
+              {
+                timeout: 5000,
+              }
+            );
+          }
+        }
+      );
       return;
     }
-    // створення нового контакта
     dispatch(addContacts(value));
   };
 

@@ -1,15 +1,10 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
-// import {
-//   fetchingInProgress,
-//   fetchingSuccess,
-//   fetchingError,
-// } from './contactsSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://650da63fa8b42265ec2c8b53.mockapi.io';
 
-//зовнішні єкшени (actions),створюють єкшени
+//зовнішні (actions),створюють action
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   async (_, thunkAPI) => {
@@ -47,14 +42,3 @@ export const deleteContactsById = createAsyncThunk(
     }
   }
 );
-
-// export const fetchContacts = () => async dispatch => {
-//   try {
-//     dispatch(fetchingInProgress());
-//     const resp = await axios.get('/contacts');
-//     console.log(resp.data);
-//     dispatch(fetchingSuccess(resp.data));
-//   } catch (error) {
-//     dispatch(fetchingError(error.message));
-//   }
-// };

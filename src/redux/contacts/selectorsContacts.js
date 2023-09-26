@@ -16,12 +16,3 @@ export const selectContacrtList = createSelector(
     );
   }
 );
-
-// export const selectContacrtList = state => {
-//   const contactsItems = selectContacts(state);
-
-//   console.log(selectFilter);
-//   return contactsItems.items.filter(contact =>
-//     contact.name.toLowerCase().includes(selectFilter().toLowerCase())
-//   );
-// };
