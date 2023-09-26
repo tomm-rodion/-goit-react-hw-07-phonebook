@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
-import getContacts from 'redux/contacts/selectors';
-import { addContact } from 'redux/contacts/contactsSlice';
+import { selectContacts } from 'redux/contacts/selectorsContacts';
 import initialValues from 'utils/initialValues';
 import schema from 'utils/validationSchema';
 
@@ -11,10 +10,11 @@ import {
   Label,
   ButtonAddContact,
 } from './ContactsForm.styled';
+import { addContacts } from 'redux/contacts/operations';
 
 export const ContactsForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const onformSubmit = value => {
     const nameInContacts = contacts.find(
@@ -25,8 +25,8 @@ export const ContactsForm = () => {
       alert(`${value.name} is already in contacts.`);
       return;
     }
-    // // створення нового контакта
-    dispatch(addContact(value));
+    // створення нового контакта
+    dispatch(addContacts(value));
   };
 
   const handleSubmit = (value, { resetForm }) => {
