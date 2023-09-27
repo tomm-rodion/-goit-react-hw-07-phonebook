@@ -18,14 +18,13 @@ export const ContactList = () => {
   const contactsList = useSelector(selectContacrtList);
   const isLoading = useSelector(selectISLoading);
   const error = useSelector(selectError);
-  console.log(contactsList);
   return (
     <ul>
       {isLoading && <b>Loading contacts...</b>}
       {error && <b>{error}</b>}
       {contactsList.length > 0 &&
-        contactsList.map(({ name, phone, id }) => (
-          <ContactItem key={id} name={name} id={id} number={phone} />
+        contactsList.map(({ name, number, id }) => (
+          <ContactItem key={id} name={name} id={id} number={number} />
         ))}
     </ul>
   );

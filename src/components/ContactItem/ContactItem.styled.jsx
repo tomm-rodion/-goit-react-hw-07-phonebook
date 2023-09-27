@@ -6,6 +6,9 @@ export const ItemContact = styled.li`
   justify-content: space-between;
   align-items: center;
 `;
+export const ItemSpan = styled.span`
+  padding-right: 8px;
+`;
 
 export const ButtonDeleteContact = styled.button`
   ${font({ fs: 14, fw: 400, lh: 18 })};

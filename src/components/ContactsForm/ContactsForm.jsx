@@ -36,9 +36,9 @@ export const ContactsForm = () => {
         'Answer',
         'Cancel',
         function okCb(newName) {
-          let result = renameContact(newName);
+          const result = renameContact(newName);
           if (!result) {
-            dispatch(addContacts((value = { name: newName, number })));
+            dispatch(addContacts({ name: newName, number }));
           } else {
             Notiflix.Notify.warning(
               `What you do? Name : ${newName} already exists !!!. `,

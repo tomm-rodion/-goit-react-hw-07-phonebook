@@ -2,7 +2,7 @@ export const handleFetchContactsFulfilledReducer = (state, action) => {
   state.items = action.payload;
 };
 export const handleAddContactFulfilledReducer = (state, action) => {
-  state.items.push(action.payload);
+  state.items.unshift(action.payload);
 };
 export const handleDeleteContactsFulfilledReducer = (state, action) => {
   const updateContactsList = state.items.filter(
